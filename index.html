@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aisha Fashion Blind Ltd. | Marketplace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <h1>Aisha Fashion Blind Ltd.</h1>
+            <p>Marketplace • Vertical Blinds • Thai Glass • Max & Kai Aluminum</p>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" data-page="home" class="active">Home</a></li>
+            <li><a href="#" data-page="vertical">Vertical Blinds</a></li>
+            <li><a href="#" data-page="thai">Thai Glass</a></li>
+            <li><a href="#" data-page="aluminum">Max Aluminum</a></li>
+            <li><a href="#" data-page="kai">Kai Aluminum</a></li>
+            <li><a href="#" data-page="about">About</a></li>
+            <li><a href="#" id="openAdminBtn" class="admin-icon"><i class="fas fa-crown"></i> Admin</a></li>
+        </ul>
+        <div class="hamburger" id="hamburgerBtn">☰</div>
+    </div>
+</nav>
+
+<div id="home-page" class="page active">
+    <div class="hero">
+        <div>
+            <h1 style="font-size: clamp(2.8rem, 10vw, 5rem);">Premium Window & Glass Solutions</h1>
+            <p style="font-size: clamp(1.2rem, 4.5vw, 1.6rem); margin:1.5rem 0 2rem;">
+                Vertical Blinds • Thai Glass • Max & Kai Aluminum<br>
+                <strong>Brahmanbaria • All Bangladesh • Since 2015</strong>
+            </p>
+            <a href="https://wa.me/8801716437372" class="whatsapp-btn" target="_blank">
+               <i class="fab fa-whatsapp"></i> Contact on WhatsApp
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Pages for products -->
+<div id="vertical-page" class="page">
+    <h2 class="section-title">Vertical Fashion Blinds</h2>
+    <div id="vertical-grid" class="product-grid"></div>
+</div>
+
+<div id="thai-page" class="page">
+    <h2 class="section-title">Premium Thai Glass (Imported from Thailand)</h2>
+    <div id="thai-grid" class="product-grid"></div>
+</div>
+
+<div id="aluminum-page" class="page">
+    <h2 class="section-title">Max Aluminum Systems</h2>
+    <div id="aluminum-grid" class="product-grid"></div>
+</div>
+
+<div id="kai-page" class="page">
+    <h2 class="section-title">Kai Aluminum Premium Series</h2>
+    <div id="kai-grid" class="product-grid"></div>
+</div>
+
+<div id="about-page" class="page">
+    <div style="max-width:1100px; margin:0 auto; padding:3rem 1rem; text-align:center;">
+        <h2 class="section-title">About Aisha Fashion Blind Ltd.</h2>
+        <p style="font-size:1.2rem; line-height:1.9; max-width:800px; margin:0 auto 2rem;">
+            Leading supplier in Brahmanbaria for premium Vertical Blinds, Imported Thai Glass, Max Aluminum and Kai Aluminum systems.
+            All products are high quality and imported. Manage everything from the admin panel.
+        </p>
+        <p style="font-size:1.3rem;"><strong>Contact:</strong> 01716437372 (Call & WhatsApp)</p>
+    </div>
+</div>
+
+<footer>
+    <p><strong>© 2026 Aisha Fashion Blind Ltd.</strong> | Developed by AISH | All Rights Reserved</p>
+    <p class="contact">
+        <i class="fas fa-map-marker-alt"></i> Dattayara, Brahmanbaria Sadar
+    </p>
+    <p class="contact">
+        <i class="fas fa-phone-alt"></i> 01716437372 (Call & WhatsApp)
+    </p>
+</footer>
+
+<a href="https://wa.me/8801716437372" target="_blank" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
+
+<!-- Admin Modal -->
+<div id="adminModal" class="admin-modal">
+    <div class="admin-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h2><i class="fas fa-crown"></i> Admin Panel</h2>
+            <button id="closeAdminBtn" style="background: none; border: none; font-size: 2rem; cursor: pointer;">&times;</button>
+        </div>
+        
+        <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; overflow-x: auto;">
+            <button class="admin-tab active" data-cat="vertical">Vertical Blinds</button>
+            <button class="admin-tab" data-cat="thai">Thai Glass</button>
+            <button class="admin-tab" data-cat="aluminum">Max Aluminum</button>
+            <button class="admin-tab" data-cat="kai">Kai Aluminum</button>
+        </div>
+        
+        <div id="adminProductsList" style="margin-bottom: 2rem; max-height: 400px; overflow-y: auto;">
+            <!-- Products will be listed here -->
+        </div>
+        
+        <h3>Add New Product</h3>
+        <form id="addProductForm">
+            <input type="text" id="productName" placeholder="Product Name" required>
+            <input type="text" id="productPrice" placeholder="Price (e.g., 160 sqft)" required>
+            <textarea id="productDescription" rows="3" placeholder="Description"></textarea>
+            <input type="file" id="productImage" accept="image/*">
+            <div id="uploadStatus" style="font-size: 0.9rem; margin: 10px 0; color: #666;"></div>
+            <button type="submit" class="admin-btn">Add Product</button>
+        </form>
+    </div>
+</div>
+
+<!-- Product View Modal -->
+<div id="productModal" class="product-modal">
+    <div class="modal-content">
+        <div style="padding: 1rem; text-align: right;">
+            <button id="closeProductModal" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+        </div>
+        <div id="modalDetails" style="padding: 1rem 2rem 2rem;"></div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

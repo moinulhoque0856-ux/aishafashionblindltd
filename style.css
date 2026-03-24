@@ -1,0 +1,399 @@
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body { 
+    font-family: 'Inter', sans-serif; 
+    background: #fdfaf5; 
+    color: #1f2937; 
+    line-height: 1.6; 
+}
+
+.navbar { 
+    position: fixed; 
+    top: 0; 
+    width: 100%; 
+    background: rgba(255,255,255,0.98); 
+    backdrop-filter: blur(15px); 
+    box-shadow: 0 4px 25px rgba(0,0,0,0.1); 
+    z-index: 1000; 
+    padding: 1rem 1.5rem; 
+}
+
+.nav-container { 
+    max-width: 1400px; 
+    margin: 0 auto; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.logo h1 { 
+    font-size: clamp(1.6rem, 5vw, 2.1rem); 
+    font-weight: 900; 
+    background: linear-gradient(135deg,#d97706,#b45309); 
+    -webkit-background-clip: text; 
+    color: transparent; 
+}
+
+.logo p { 
+    font-size: clamp(0.75rem, 2.5vw, 0.95rem); 
+    color: #4b5563; 
+    margin-top: 0.2rem; 
+}
+
+.nav-links { 
+    display: flex; 
+    gap: 1.8rem; 
+    list-style: none; 
+}
+
+.nav-links a { 
+    text-decoration: none; 
+    font-weight: 600; 
+    color: #374151; 
+    font-size: 1.02rem; 
+    transition: color 0.3s;
+}
+
+.nav-links a:hover, 
+.nav-links a.active { 
+    color: #d97706; 
+}
+
+.admin-icon { 
+    background: #1f2937; 
+    color: white !important; 
+    padding: 0.65rem 1.4rem; 
+    border-radius: 50px; 
+    font-weight: 700; 
+}
+
+.admin-icon:hover {
+    background: #d97706 !important;
+    color: white !important;
+}
+
+.hamburger { 
+    display: none; 
+    font-size: 1.9rem; 
+    cursor: pointer; 
+    color: #374151; 
+}
+
+.page { 
+    display: none; 
+    min-height: calc(100vh - 70px); 
+    padding-top: 90px; 
+}
+
+.page.active { 
+    display: block; 
+}
+
+.hero { 
+    background: linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') center/cover; 
+    height: 85vh; 
+    min-height: 520px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
+    color: white; 
+}
+
+.hero h1 { 
+    font-size: clamp(2.8rem, 10vw, 5rem); 
+}
+
+.hero p { 
+    font-size: clamp(1.2rem, 4.5vw, 1.6rem); 
+    margin: 1.5rem 0 2rem; 
+}
+
+.whatsapp-btn { 
+    background: #25D366; 
+    color: white; 
+    padding: 14px 40px; 
+    border-radius: 50px; 
+    font-size: 1.2rem; 
+    text-decoration: none; 
+    display: inline-block; 
+    transition: transform 0.3s;
+}
+
+.whatsapp-btn:hover {
+    transform: scale(1.05);
+}
+
+.section-title { 
+    font-size: clamp(1.9rem, 6vw, 3rem); 
+    font-weight: 800; 
+    text-align: center; 
+    margin: clamp(2.5rem, 8vw, 4rem) 0; 
+    position: relative; 
+}
+
+.section-title:after { 
+    content: ''; 
+    position: absolute; 
+    bottom: -10px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 100px; 
+    height: 5px; 
+    background: #d97706; 
+}
+
+.product-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 1.8rem; 
+    padding: 1.5rem; 
+    max-width: 1400px; 
+    margin: 0 auto; 
+}
+
+.product-card { 
+    background: white; 
+    border-radius: 20px; 
+    overflow: hidden; 
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08); 
+    transition: 0.35s; 
+    cursor: pointer; 
+}
+
+.product-card:hover { 
+    transform: translateY(-12px); 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.product-card img { 
+    width: 100%; 
+    height: 240px; 
+    object-fit: cover; 
+    background: #f3f4f6; 
+}
+
+.no-image-placeholder { 
+    height: 240px; 
+    background: linear-gradient(135deg,#f9e8d2,#e8d5b8); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: #a07840; 
+    font-weight: 600; 
+    font-size: 1.1rem; 
+    text-align: center; 
+    padding: 1rem; 
+}
+
+.product-info { 
+    padding: 1.3rem; 
+}
+
+.product-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.price { 
+    color: #d97706; 
+    font-size: clamp(1.25rem, 4.5vw, 1.5rem); 
+    font-weight: 700; 
+}
+
+.product-modal { 
+    display: none; 
+    position: fixed; 
+    inset: 0; 
+    background: rgba(0,0,0,0.88); 
+    z-index: 3000; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 1rem; 
+}
+
+.modal-content { 
+    background: white; 
+    max-width: 92%; 
+    width: 900px; 
+    border-radius: 24px; 
+    overflow: hidden; 
+    max-height: 95vh; 
+    overflow-y: auto; 
+}
+
+.admin-modal { 
+    display: none; 
+    position: fixed; 
+    inset: 0; 
+    background: rgba(0,0,0,0.9); 
+    z-index: 4000; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 1rem; 
+}
+
+.admin-panel { 
+    background: white; 
+    width: 96%; 
+    max-width: 880px; 
+    border-radius: 24px; 
+    padding: 1.8rem; 
+    max-height: 94vh; 
+    overflow-y: auto; 
+}
+
+input, textarea { 
+    width: 100%; 
+    padding: 13px; 
+    margin: 10px 0; 
+    border: 1px solid #d1d5db; 
+    border-radius: 14px; 
+    font-size: 1rem; 
+    font-family: inherit;
+}
+
+.admin-btn { 
+    background: #d97706; 
+    color: white; 
+    border: none; 
+    padding: 13px 30px; 
+    border-radius: 999px; 
+    font-weight: 700; 
+    cursor: pointer; 
+    width: 100%; 
+    margin: 8px 0; 
+    transition: background 0.3s;
+}
+
+.admin-btn:hover {
+    background: #b45309;
+}
+
+.admin-tab { 
+    padding: 10px 20px; 
+    background: #f3f4f6; 
+    border-radius: 999px; 
+    cursor: pointer; 
+    font-weight: 600; 
+    white-space: nowrap;
+    border: none;
+    transition: all 0.3s;
+}
+
+.admin-tab.active { 
+    background: #d97706; 
+    color: white; 
+}
+
+.admin-product-item {
+    background: #f9fafb;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-product-item button {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.empty { 
+    text-align: center; 
+    padding: 4rem 1rem; 
+    font-size: 1.25rem; 
+    color: #6b7280; 
+}
+
+footer { 
+    background: #111827; 
+    color: #d1d5db; 
+    padding: 3rem 1.5rem 2rem; 
+    text-align: center; 
+    font-size: 0.95rem; 
+    margin-top: 4rem; 
+    border-top: 1px solid #374151; 
+}
+
+footer p { 
+    margin: 0.6rem 0; 
+}
+
+footer .contact { 
+    font-size: 1.1rem; 
+    margin-top: 1.5rem; 
+    color: #e5e7eb; 
+}
+
+footer .contact i { 
+    margin-right: 8px; 
+    color: #d97706; 
+}
+
+.whatsapp-float { 
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    background: #25D366; 
+    width: 60px; 
+    height: 60px; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 2.1rem; 
+    color: white; 
+    box-shadow: 0 5px 20px rgba(37,211,102,0.45); 
+    z-index: 9999; 
+    text-decoration: none; 
+    transition: transform 0.3s;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 980px) {
+    .nav-links { 
+        display: none; 
+        flex-direction: column; 
+        position: absolute; 
+        top: 100%; 
+        left: 0; 
+        right: 0; 
+        background: rgba(255,255,255,0.98); 
+        padding: 1.5rem; 
+        box-shadow: 0 10px 25px rgba(0,0,0,0.12); 
+    }
+    .nav-links.active { 
+        display: flex; 
+    }
+    .hamburger { 
+        display: block; 
+    }
+    .product-grid { 
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
+        gap: 1.4rem; 
+        padding: 1rem; 
+    }
+}
+
+@media (max-width: 640px) {
+    footer { 
+        padding: 2.5rem 1rem 1.5rem; 
+    }
+    footer .contact { 
+        font-size: 1rem; 
+    }
+}
