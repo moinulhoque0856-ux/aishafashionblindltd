@@ -1,27 +1,21 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
 import os
 from datetime import datetime
 import cloudinary
 import cloudinary.uploader
-import cloudinary.api
 
-# --------------------------
-# Configure Cloudinary - USING CORRECT CREDENTIALS
-# --------------------------
+# Get Cloudinary settings from environment variables
 cloudinary.config(
-    cloud_name="aishcloud",  # Correct cloud name (lowercase)
-    api_key="519394657282751",  # Root API Key
-    api_secret="Vs-9mwPYKGsgBP7PuJc85QISlLU",  # Root API Secret
+    cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME', 'aishcloud'),
+    api_key=os.environ.get('CLOUDINARY_API_KEY', '519394657282751'),
+    api_secret=os.environ.get('CLOUDINARY_API_SECRET', 'Vs-9mwPYKGsgBP7PuJc85QISlLU'),
     secure=True
 )
 
-# --------------------------
-# Flask setup
-# --------------------------
-app = Flask(__name__, static_folder='.', static_url_path='')
-CORS(app, resources={r"/*": {"origins": "*"}})
+app = Flask(__name__)
+CORS(app)
 
 DATA_FILE = 'gallery_data.json'
 DEFAULT_DATA = {
@@ -31,27 +25,21 @@ DEFAULT_DATA = {
     "kai": []
 }
 
-# --------------------------
-# Load & Save Data
-# --------------------------
 def load_data():
     if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, 'r', encoding='utf-8') as f:
+        with open(DATA_FILE, 'r') as f:
             return json.load(f)
-    with open(DATA_FILE, 'w', encoding='utf-8') as f:
-        json.dump(DEFAULT_DATA, f, indent=2)
+    with open(DATA_FILE, 'w') as f:
+        json.dump(DEFAULT_DATA, f)
     return DEFAULT_DATA
 
 def save_data(data):
-    with open(DATA_FILE, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=2)
+    with open(DATA_FILE, 'w') as f:
+        json.dump(data, f)
 
-# --------------------------
-# API Routes
-# --------------------------
 @app.route('/')
-def index():
-    return send_from_directory('.', 'index.html')
+def home():
+    return jsonify({"message": "Aisha Fashion Blind API is running", "status": "healthy"})
 
 @app.route('/api/gallery', methods=['GET'])
 def get_gallery():
@@ -76,9 +64,6 @@ def delete_product(category, pid):
         save_data(data)
     return jsonify({"success": True})
 
-# --------------------------
-# Upload image to Cloudinary
-# --------------------------
 @app.route('/api/upload', methods=['POST'])
 def upload_image():
     if 'image' not in request.files:
@@ -86,21 +71,12 @@ def upload_image():
     file = request.files['image']
     if file.filename == '':
         return jsonify({"error": "No file selected"}), 400
-
-    # Upload to Cloudinary
     try:
         result = cloudinary.uploader.upload(file)
-        url = result['secure_url']
-        return jsonify({"url": url})
+        return jsonify({"url": result['secure_url']})
     except Exception as e:
-        print("Cloudinary upload error:", e)
         return jsonify({"error": str(e)}), 500
 
-# --------------------------
-# Run server
-# --------------------------
 if __name__ == '__main__':
-    print("=== Aisha Fashion Blind Server Starting ===")
-    print(f"Cloudinary configured with cloud_name: aishcloud")
-    print("Open http://127.0.0.1:5000 in your browser")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
